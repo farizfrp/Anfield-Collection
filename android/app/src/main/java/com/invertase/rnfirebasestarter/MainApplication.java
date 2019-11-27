@@ -7,7 +7,7 @@ import com.facebook.react.PackageList;
 import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
 import com.facebook.react.bridge.JavaScriptExecutorFactory;
 
-import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
@@ -27,7 +27,7 @@ import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import io.invertase.firebase.perf.RNFirebasePerformancePackage;
 import io.invertase.firebase.storage.RNFirebaseStoragePackage;
-
+//import com.RNFetchBlobPackage;
 import java.util.List;
 
 public class MainApplication extends MultiDexApplication implements ReactApplication {
@@ -58,6 +58,10 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
             packages.add(new RNFirebaseNotificationsPackage());
             packages.add(new RNFirebasePerformancePackage());
             packages.add(new RNFirebaseStoragePackage());
+            // packages.add(new RNFetchBlobPackage());
+            // packages.add( new RCTPdfView());
+         
+               
         return packages;
     }
 

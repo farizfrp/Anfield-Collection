@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "144876078188",
+    "firebase_url": "https://fir-reactnative-e4275.firebaseio.com",
+    "project_id": "fir-reactnative-e4275",
+    "storage_bucket": "fir-reactnative-e4275.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144876078188:android:9c613fc55e8bf44296c449",
+        "android_client_info": {
+          "package_name": "com.firebasereactnative"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "144876078188-oqtmpb5mggb2sif4db673apdpukb6d22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP194DScl9OBYJFGjYdsqNK8ayXgR7ypg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "144876078188-oqtmpb5mggb2sif4db673apdpukb6d22.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144876078188:android:46d71560fed4e81896c449",
+        "android_client_info": {
+          "package_name": "com.invertase.rnfirebasestarter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "144876078188-oqtmpb5mggb2sif4db673apdpukb6d22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP194DScl9OBYJFGjYdsqNK8ayXgR7ypg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "144876078188-oqtmpb5mggb2sif4db673apdpukb6d22.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
