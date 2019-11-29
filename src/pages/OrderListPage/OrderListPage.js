@@ -89,7 +89,7 @@ export default class OrderListPage extends Component {
                                         <Text style={{ textAlign: "center", marginTop: 5 }}>{item.payment.transaction_status}</Text>
                                     </View>
                                     <View style={{ marginHorizontal: 10, backgroundColor: "#f5f6f7", flexDirection: "row", justifyContent: "space-between", borderBottomWidth: 1, borderColor: "grey" }}>
-                                        <Text style={{ fontWeight: "bold", fontSize: 12, marginHorizontal: 20, marginVertical: 5 }}>INV/2019002/001</Text>
+                            <Text style={{ fontWeight: "bold", fontSize: 12, marginHorizontal: 20, marginVertical: 5 }}>{item.id}</Text>
                                         <Text style={{ color: "grey", fontSize: 11, marginHorizontal: 20, marginVertical: 5 }} >{this.timestampToDate(item.created_on)}</Text>
 
                                     </View>
@@ -99,7 +99,7 @@ export default class OrderListPage extends Component {
                                                 <Image source={{ uri: item.products[0].data[0].imageURL[0] }} style={{ marginHorizontal: 20, borderRadius: 15, height: 90, width: 85 }}></Image></View>
                                             <View style={{ marginHorizontal: 25, marginVertical: 45 }}>
                                                 <Text style={{}}>{item.products[0].data[0].name} </Text>
-                                                <Text style={{ color: "grey", fontSize: 12 }}>{item.products.length} Barang</Text>
+                                                <Text style={{ color: "grey", fontSize: 12 }}>{item.products.length} Toko</Text>
                                                 <Text style={{ color: "red" }}>Rp.{item.total} </Text>
 
                                             </View>

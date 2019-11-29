@@ -23,14 +23,7 @@ state = {
 
 
 export default class Logo extends Component {
-  async setAuth() {
-    console.log("setAuth")
-    var result = JSON.parse(await AsyncStorage.getItem('auth'));
-
-    global.userid = result.auth.id;
-    global.cartChanged = false;
-
-  }
+ 
   onLoginSuccess() {
 
     Actions.MainPage({ email: this.state.email });
@@ -52,6 +45,7 @@ export default class Logo extends Component {
       .then((responseJson) => {
        user.auth.shipping= responseJson.shipping;
        user.auth.role= responseJson.role;
+       user.auth.username= responseJson.username;
        AsyncStorage.setItem('auth', JSON.stringify(user), async () => {
 
        
@@ -65,6 +59,7 @@ export default class Logo extends Component {
   
       
         global.userid = result.auth.id;
+        global.username= result.auth.username;
         global.cartChanged = true;
         global.userRole = result.auth.role;
         global.shipping = result.auth.shipping;

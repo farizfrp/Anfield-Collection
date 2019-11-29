@@ -135,103 +135,79 @@ export default class OrderDetailPage extends Component {
                     >
 
                         <View>
-                            <View><Text style={{ fontSize: 13, color: "grey", marginTop: 10, marginHorizontal: 6 }}> Status</Text></View>
-                            <View style={{ flexDirection: "row", justifyContent: "space-between", marginHorizontal: 10, paddingBottom: 10, borderBottomWidth: 1, borderColor: "grey" }}>
-                                <Text style={{ fontSize: 15, color: "green", fontWeight: "bold" }}>{this.state.data.payment.transaction_status}</Text>
-                                <Text style={{ color: "green" }}>Lihat</Text>
-                            </View>
-
-                            {/* tanggal pembelian */}
-                            <View style={{ flexDirection: "row", justifyContent: "space-between", marginHorizontal: 10, paddingVertical: 10, borderBottomWidth: 1, borderColor: "grey" }}>
-                                <Text style={{ fontSize: 12 }}>Tanggal Pembelian</Text>
-                                <Text style={{ fontSize: 12 }}>{this.data.created_on} 15:19 WIB</Text>
-                            </View>
-                            {/* invoice */}
-                            <View style={{ flexDirection: "row", justifyContent: "space-between", marginHorizontal: 10, paddingVertical: 10, borderBottomWidth: 1, borderColor: "grey" }}>
-                                <Text style={{ fontSize: 12 }}>INV/20190909/XI1234</Text>
-                                <Text style={{ color: "green" }}>Lihat</Text>
-                            </View>
-                            {/* daftar produk */}
-                            <View><Text style={{ fontSize: 15, fontWeight: "bold", marginVertical: 15, marginHorizontal: 17 }}>Daftar Produk</Text></View>
-                            {/* product */}
+                        
+                        
 
 
 
                             <SectionList
                                 sections={this.state.data.products}
                                 keyExtractor={(item, index) => item + index}
-                                renderItem={({ item, index }) => (<View><View style={{ borderBottomWidth: 0.3, color: "grey", paddingTop: 15 }}>
+                                renderItem={({ item, index }) => (<View><View style={{ borderBottomWidth: 0.3, color: "grey" }}>
 
 
                                 </View><View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 10 }}>
                                         <Image style={{ marginHorizontal: 20, width: 50, height: 50 }} source={{ uri: item.imageURL[0] }} />
-                                        <Text style={{ fontSize: 14, fontWeight: "bold", marginLeft: -95 }}>{item.name}
-                                        </Text>
+                                        
 
 
 
                                     </View>
-                                    <Text style={{ marginLeft: 120, marginTop: -30, color: "Grey", paddingVertical: 5 }}>Quantity : {item.quantity} </Text>
+                                    <Text style={{ marginLeft: 120, marginTop: -50, fontSize: 14, fontWeight: "bold", }}>{item.name} </Text>
+                                    <Text style={{ marginLeft: 120, color: "Grey", paddingVertical: 5 }}>Quantity : {item.quantity} </Text>
                                     <Text style={{ marginLeft: 120, marginTop: -1, color: "red" }}>Rp.{item.price}</Text>
                                 </View>)}
                                 renderSectionHeader={({ section: { invoice, merchantname, shipping, title }, index }) => (
-
+                                 
+                                   <>
+                                   <View style={{ borderBottomWidth: 0.5, borderColor: "grey", borderTopWidth: 1, marginVertical: 10, borderColor: "grey" }}></View>
+                                    <View>
+                                        
+                                        <View><Text style={{ fontSize: 13, color: "grey", marginTop: 10, marginHorizontal: 6 }}> Status</Text></View>
+                                    <View style={{ flexDirection: "row", justifyContent: "space-between", marginHorizontal: 10, paddingBottom: 10, borderBottomWidth: 1, borderColor: "grey" }}>
+                                        <Text style={{ fontSize: 15, color: "green", fontWeight: "bold" }}>{this.getStatus(shipping.status)}</Text>
+                                        <Text style={{ color: "green" }}>Lihat</Text>
+                                    </View>
+        
+                            
+                                    <View style={{ flexDirection: "row", justifyContent: "space-between", marginHorizontal: 10, paddingVertical: 10, borderBottomWidth: 1, borderColor: "grey" }}>
+                                        <Text style={{ fontSize: 12 }}>Tanggal Pembelian</Text>
+                                        <Text style={{ fontSize: 12 }}>{this.data.created_on} </Text>
+                                    </View>
+                                   
+                                    <View style={{ flexDirection: "row", justifyContent: "space-between", marginHorizontal: 10, paddingVertical: 10, borderBottomWidth: 1, borderColor: "grey" }}>
+                                        <Text style={{ fontSize: 12 }}>INV/20190909/XI1234</Text>
+                                        <Text style={{ color: "green" }} 
+                                                onPress={() => { Linking.openURL(invoice) }}>Lihat</Text>
+                                    </View></View>
                                     <View>
                                         <Text style={{ fontSize: 15, marginLeft: 20, paddingTop: 5 }}>Toko : {merchantname}</Text>
                                         <Text style={{ fontSize: 15, marginLeft: 20, paddingTop: 5 }}>Tracking Number : {shipping.trackingnumber}</Text>
                                         <Text style={{ fontSize: 15, marginLeft: 20, paddingTop: 5 }}>Kurir - Service : {shipping.courier + " - " + shipping.service}</Text>
                                         <Text style={{ fontSize: 15, marginLeft: 20, paddingTop: 5 }}>Ongkos Kirim : {shipping.deliveryfee}</Text>
-                                        <Text style={{ fontSize: 15, marginLeft: 20, paddingTop: 5 }}>Status : {this.getStatus(shipping.status)}</Text>
                                         <Text style={{ fontSize: 15, marginLeft: 20, paddingTop: 5 }}>Invoice :
   <Text
                                                 style={{ color: 'red' }}
                                                 onPress={() => { Linking.openURL(invoice) }}
                                             >
-                                                {invoice}
+                                                {''}
                                             </Text>
 
                                         </Text>
                                         {this.renderDeliveryButton(this.getStatus(shipping.status), title)}
+                                        <View style={{ borderBottomWidth: 0.5, borderColor: "grey", borderTopWidth: 1, marginVertical: 10, borderColor: "grey" }}></View>
+                                        <Text style={{ fontSize: 15, fontWeight: "bold",textAlign:"center", marginVertical: 15, marginHorizontal: 17 }}>Daftar Produk</Text>
                                     </View>
-
+</>
 
                                 )}
                             />
                             {/* product */}
 
 
-                            <View style={{ borderBottomWidth: 0.5, borderColor: "grey", borderTopWidth: 1, marginVertical: 10, borderColor: "grey" }}>
-                                <View><Text style={{ fontSize: 15, fontWeight: "bold", marginVertical: 15, marginHorizontal: 17 }}>Detail Pengiriman</Text></View>
-                                <View style={{}}>
-                                    <View style={{ flexDirection: "row", justifyContent: "space-between", marginHorizontal: 20, marginVertical: 10 }}>
-                                        <Text style={{ color: "grey" }}>Nama                               :</Text>
-                                        <Text style={{ fontWeight: "bold", textAlign: "left" }}>{this.data.shipping.customer} </Text>
-
-                                    </View>
-                                    <View style={{ flexDirection: "row", justifyContent: "space-between", marginHorizontal: 20, marginVertical: 10 }}>
-                                        <Text style={{ color: "grey" }}>Kurir Pengiriman           :</Text>
-                                        <Text style={{ fontWeight: "bold", textAlign: "left" }}> {this.data.shipping.tracking.company} </Text>
-
-                                    </View>
-                                    <View style={{ flexDirection: "row", justifyContent: "space-between", marginHorizontal: 20, marginVertical: 10 }}>
-                                        <Text style={{ color: "grey" }}>No Resi                            :</Text>
-                                        <Text style={{ fontWeight: "bold", textAlign: "left" }}> {this.data.shipping.tracking.tracking_number}  </Text>
-
-                                    </View>
-                                    <View style={{ flexDirection: "row", justifyContent: "space-between", marginHorizontal: 20, marginVertical: 10, paddingBottom: 20 }}>
-                                        <Text style={{ color: "grey" }}>Alamat Pengiriman      :</Text>
-                                        <Text style={{ fontWeight: "bold", textAlign: "left" }}>
-                                            {this.data.shipping.address}</Text>
-
-                                    </View>
-
-
-
-
-
-                                </View>
-                            </View>
+                        
                             <View style={{ marginVertical: 10, borderColor: "grey" }}>
+                            <View style={{ borderBottomWidth: 0.5, borderColor: "grey", borderTopWidth: 1, marginVertical: 10, borderColor: "grey" }}></View>
                                 <View><Text style={{ fontSize: 15, fontWeight: "bold", marginVertical: 15, marginHorizontal: 17 }}>Informasi Pembayaran</Text></View>
                                 <View style={{}}>
                                     <View style={{ flexDirection: "row", justifyContent: "space-between", marginHorizontal: 20, marginVertical: 10, borderBottomWidth: 0.5, borderColor: "grey", paddingBottom: 5 }}>

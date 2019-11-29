@@ -14,7 +14,7 @@ import { Actions } from 'react-native-router-flux';
 
 console.disableYellowBox= true;
 
-ip='192.168.0.20';
+ip='11.11.11.254';
 
 
 
@@ -22,11 +22,7 @@ ip='192.168.0.20';
 
 
 export default class App extends Component {
-  async  setAuth(){
-    var result = await AsyncStorage.getItem('auth');
-  global.userid= result.id;
-  
-  }
+
   constructor(){
  
     super();
@@ -40,6 +36,7 @@ async setAuth(){
   var result = JSON.parse(await AsyncStorage.getItem('auth'));
   
   global.userid = result.auth.id;
+  global.username= result.auth.username;
   global.cartChanged = false;
 
 }

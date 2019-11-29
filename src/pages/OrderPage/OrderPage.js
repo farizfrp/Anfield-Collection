@@ -224,6 +224,7 @@ return;
 
         var index = 0;
         this.order.userid = global.userid;
+        this.order.username = global.username;
 for(const ord of this.data){
 this.order.products[index].shipping=this.shippings[index];
 index++;

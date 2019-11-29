@@ -100,7 +100,7 @@ async updateProfile(){
             body:JSON.stringify({profile:this.profile,isStatusChanged:isStatusChanged})
           }) ;
           global.userChanged=0;
-      
+          global.username= this.profile.username;
 
 }
      async onSubmit(){
