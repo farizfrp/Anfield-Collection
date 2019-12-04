@@ -117,7 +117,7 @@ async groupBahan(categories){
 
        
             //   ip = '192.168.1.7';
-             await fetch('http://' + ip + ':3001/getCategories', {
+             await fetch(ip + '/getCategories', {
                method: 'GET',
                headers: {
                  'Accept': 'application/json',
@@ -283,7 +283,7 @@ var onSuccess;
         data.userstatus='active';
         data.imageURL=this.images;
        // ip='192.168.1.7';
-    let x = await fetch('http://' + ip + ':3001/addProduct', {
+    let x = await fetch(ip + '/addProduct', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

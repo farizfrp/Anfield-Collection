@@ -59,7 +59,7 @@ export default class MerchantMenuPage extends Component {
 
   async getReport() {
     //   ip = '192.168.1.7';
-    let x = await fetch('http://' + ip + ':3001/getSellReport', {
+    let x = await fetch(ip + '/getSellReport', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -109,7 +109,7 @@ export default class MerchantMenuPage extends Component {
     console.log('getProductCat');
 
     //   ip = '192.168.1.7';
-    let x = await fetch('http://' + ip + ':3001/getProfile', {
+    let x = await fetch(ip + '/getProfile', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

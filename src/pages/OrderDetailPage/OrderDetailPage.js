@@ -27,13 +27,13 @@ export default class OrderDetailPage extends Component {
 
         this.setState({ refreshing: true });
      
-        let x = fetch('http://' + ip + ':3001/checkPayment', {
+        let x = fetch(ip + '/checkPayment', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ idorder: this.data.payment.order_id })
+            body: JSON.stringify({ order_id: this.data.payment.order_id })
         }).then((response) => response.json())
             .then((responseJson) => {
            
@@ -62,7 +62,7 @@ export default class OrderDetailPage extends Component {
 
 
         
-        let x = fetch('http://' + ip + ':3001/updateShipping', {
+        let x = fetch(ip + '/updateShipping', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -175,25 +175,19 @@ export default class OrderDetailPage extends Component {
                                         <Text style={{ fontSize: 12 }}>{this.data.created_on} </Text>
                                     </View>
                                    
-                                    <View style={{ flexDirection: "row", justifyContent: "space-between", marginHorizontal: 10, paddingVertical: 10, borderBottomWidth: 1, borderColor: "grey" }}>
+                                    {invoice&&   <View style={{ flexDirection: "row", justifyContent: "space-between", marginHorizontal: 10, paddingVertical: 10, borderBottomWidth: 1, borderColor: "grey" }}>
                                         <Text style={{ fontSize: 12 }}>INV/20190909/XI1234</Text>
-                                        <Text style={{ color: "green" }} 
+                                         <Text style={{ color: "green" }} 
                                                 onPress={() => { Linking.openURL(invoice) }}>Lihat</Text>
-                                    </View></View>
+                                </View>}</View>
                                     <View>
                                         <Text style={{ fontSize: 15, marginLeft: 20, paddingTop: 5 }}>Toko : {merchantname}</Text>
                                         <Text style={{ fontSize: 15, marginLeft: 20, paddingTop: 5 }}>Tracking Number : {shipping.trackingnumber}</Text>
                                         <Text style={{ fontSize: 15, marginLeft: 20, paddingTop: 5 }}>Kurir - Service : {shipping.courier + " - " + shipping.service}</Text>
                                         <Text style={{ fontSize: 15, marginLeft: 20, paddingTop: 5 }}>Ongkos Kirim : {shipping.deliveryfee}</Text>
-                                        <Text style={{ fontSize: 15, marginLeft: 20, paddingTop: 5 }}>Invoice :
-  <Text
-                                                style={{ color: 'red' }}
-                                                onPress={() => { Linking.openURL(invoice) }}
-                                            >
-                                                {''}
-                                            </Text>
+                                   
 
-                                        </Text>
+                                        
                                         {this.renderDeliveryButton(this.getStatus(shipping.status), title)}
                                         <View style={{ borderBottomWidth: 0.5, borderColor: "grey", borderTopWidth: 1, marginVertical: 10, borderColor: "grey" }}></View>
                                         <Text style={{ fontSize: 15, fontWeight: "bold",textAlign:"center", marginVertical: 15, marginHorizontal: 17 }}>Daftar Produk</Text>

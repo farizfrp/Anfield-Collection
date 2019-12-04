@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
-import { Text, View, Image, ScrollView, TextInput, Button,TouchableOpacity,FlatList,ActivityIndicator,StatusBar,picker } from 'react-native';
+import { Dimensions,View, Image, ScrollView, TextInput, TouchableOpacity,FlatList,ActivityIndicator,StatusBar,picker } from 'react-native';
+import { Container, Header, Content, Button, ListItem, Text, Icon, Left, Body, Right, Switch } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import DateTimePicker from "react-native-modal-datetime-picker";
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from "react-native-chart-kit";
 //import { auth } from 'firebase-admin';
 
 
@@ -18,7 +27,9 @@ export default class SellReportPage extends Component {
         isDateTimePickerVisible: false,
         isStartDateTimePickerVisible:false,
         isEndDateTimePickerVisible:false,
-        date:{end:this.date.end,start:new Date(this.date.start.setMonth(this.date.start.getMonth()-1))}
+        date:{end:this.date.end,start:new Date(this.date.start.setMonth(this.date.start.getMonth()-1))},
+        labels:[],
+        data:[]
 
     };
  
@@ -45,7 +56,7 @@ this.state.date.start=this.props.date.start;
 
 
 showStartDateTimePicker = () => {
-   
+   console.log('xsxs')
     this.setState({ isStartDateTimePickerVisible: true });
  
   };
@@ -87,11 +98,12 @@ showStartDateTimePicker = () => {
         }
         //console.log('Range', this.range);
     }
+  
     async getReport() {
       this.setState({ isLoading: true });
        
      //   ip = '192.168.1.7';
-        let x = await fetch('http://' + ip + ':3001/getSellReport', {
+        let x = await fetch(ip + '/getSellReport', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -103,6 +115,14 @@ showStartDateTimePicker = () => {
         this.orders=responseJson.result;
         this.total=responseJson.total;
         this.quantity=responseJson.quantity;
+       var data = this.orders.map(a => Number((a.total.replace(',','').substring(0,a.total.length-4))));
+       data.reverse()
+       console.log(data)
+       var labels =this.orders.map(a => (new Date(a.date)).toLocaleDateString('id-ID'));
+       labels.reverse()
+       console.log(labels)
+       this.setState({ data });
+       this.setState({ labels });
         console.log("report",this.orders);
         this.setState({ isLoading: false });
           
@@ -134,11 +154,66 @@ showStartDateTimePicker = () => {
         
         
         <ScrollView>
+          <View>
+  <Text>Bezier Line Chart</Text>
+  <LineChart
+
+    data={{
+      labels: this.state.labels,
+      datasets: [
+        {
+          data: this.state.data
+        }
+      ]
+    }}
+    width={Dimensions.get("window").width} // from react-native
+    height={220}
+    yAxisLabel={"Rp."}
+    yAxisSuffix={"k"}
+    chartConfig={{
+      backgroundColor: "#e26a00",
+      backgroundGradientFrom: "#fb8c00",
+      backgroundGradientTo: "#ffa726",
+      decimalPlaces: 0, // optional, defaults to 2dp
+      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      style: {
+        borderRadius: 16
+      },
+      propsForDots: {
+        r: "6",
+        strokeWidth: "2",
+        stroke: "#ffa726"
+      }
+    }}
+    bezier
+    style={{
+      marginVertical: 8,
+      borderRadius: 16
+    }}
+  />
+</View>
         <View>
-        <Text>Sell Report Page</Text>
+      
+    
                         <Text>Tanggal Mulai</Text>
                         <>
-        <Button style={{height:50}} title={this.state.date.start.toLocaleDateString()} onPress={this.showStartDateTimePicker} />
+                        <ListItem onPress={this.showStartDateTimePicker} >
+            <Left>
+              <Button style={{  backgroundColor: "#FF9501" }}>
+                <Icon active name="play" ></Icon>
+              </Button>
+              <Text  style={{ left:20}}>{this.state.date.start.toLocaleDateString('id-ID',{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</Text>
+            </Left>
+            
+            
+          
+            <Right>
+            <Icon active name="arrow-forward" />
+            </Right>
+</ListItem>
+
+
         <DateTimePicker
         date={this.state.date.start}
           isVisible={this.state.isStartDateTimePickerVisible}
@@ -150,7 +225,21 @@ showStartDateTimePicker = () => {
                     
                         <Text>Tanggal Selesai </Text>
                         <>
-        <Button title={this.state.date.end.toLocaleDateString()} onPress={this.showEndDateTimePicker} />
+                        <Content>
+                        <ListItem onPress={this.showEndDateTimePicker} >
+            <Left>
+              <Button style={{  backgroundColor: "#FF9501" }}>
+                <Icon active name="square" ></Icon>
+              </Button>
+              <Text  style={{ left:20}}>{this.state.date.end.toLocaleDateString('id-ID',{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</Text>
+            </Left>
+            
+            
+          
+            <Right>
+            <Icon active name="arrow-forward" />
+            </Right>
+</ListItem></Content>
         <DateTimePicker
           isVisible={this.state.isEndDateTimePickerVisible}
           onConfirm={this.handleEndDatePicked}
@@ -160,42 +249,48 @@ showStartDateTimePicker = () => {
                    
        
                     <Button
-          title="Show"
-          color="red"
           onPress={() => this.getReport()}
-        />
-             <Text>Total : {this.total} </Text>   
-             <Text>Quantity : {this.quantity} </Text>  
-                
+        ><Body><Text style={{ color:"white" }}>SHOW</Text></Body></Button>
+           <View style={{marginTop:15,}}>
+                <Text style={{fontWeight: 'bold',textAlign:"center",textDecorationLine: 'underline'}} >Orders</Text>
           
           <FlatList 
 data={this.orders}
 keyExtractor={(item, index) => item.id }
 numColumns={1}
-renderItem={({item}) => (   
-  <View><TouchableOpacity onPress={() => Actions.ReportDatePage({orders:item })} >
-  <View style={{ marginTop: 10, marginHorizontal: 10, height: 30, backgroundColor: "#daffc2", borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
-      <Text style={{ textAlign: "center", marginTop: 5 }}>{""}</Text>
-  </View>
-  <View style={{ marginHorizontal: 10, backgroundColor: "#f5f6f7", flexDirection: "row", justifyContent: "space-between", borderBottomWidth: 1, borderColor: "grey" }}>
-      <Text style={{ fontWeight: "bold", fontSize: 12, marginHorizontal: 20, marginVertical: 5 }}>INV/2019002/001</Text>
-      <Text style={{ color: "grey", fontSize: 11, marginHorizontal: 20, marginVertical: 5 }} >{item.date}</Text>
-
-  </View>
-  <View style={{ borderBottomWidth: 1, borderColor: "grey", marginHorizontal: 10, borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
-      <View style={{ flexDirection: "row", backgroundColor: "#f5f6f7" }}>
-          <View style={{ marginTop: 30 }}>
-              <Image source={{ uri: item.orders[0].data[0].imageURL[0] }} style={{ marginHorizontal: 20, borderRadius: 15, height: 90, width: 85 }}></Image></View>
-          <View style={{ marginHorizontal: 25, marginVertical: 45 }}>
-              <Text style={{}}>{item.orders[0].data[0].name} </Text>
-              <Text style={{ color: "grey", fontSize: 12 }}>{item.orders.length} Order</Text>
-              <Text style={{ color: "red" }}>Rp.{item.total} </Text>
-
-          </View>
-      </View>
-  </View></TouchableOpacity></View>
+renderItem={({item}) => ( <ListItem onPress={()=> Actions.ReportDatePage({orders:item })}>
+<Left>
+    <Text>{(new Date(item.date)).toLocaleDateString('id-ID',{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) + ' ('+item.orders.length+' order)'}</Text>
+    <Text>{' Rp.'+item.total}</Text>
+</Left>
+<Right>
+  <Icon name="arrow-forward" />
+</Right>
+</ListItem>
 )}
 />
+</View>
+<ListItem onPress={()=>Actions.OrderListPage()} >
+      
+      <Button style={{ width:"50%", backgroundColor: "#FF9501" }}>
+      
+        <Body>
+        <Text style={{ color:"white" }} >Rp. {this.total}</Text></Body>
+      </Button>
+     
+   
+    
+    
+  
+    
+    <Button style={{ width:"50%", backgroundColor: "blue" }}>
+   
+        <Body>
+           <Text style={{ color:"white" }}>{this.quantity} Qty</Text></Body>
+       </Button>
+
+    
+  </ListItem>
                       
 
                     </View>

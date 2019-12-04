@@ -135,7 +135,7 @@ address=this.props.data;
 var id= this.userid;
 
 var address= {name:this.state.addressName,address:this.state.addressDetail,province:this.province,city:this.city}
-        let x = fetch('http://' + ip + ':3001/updateAddress', {
+        let x = fetch(ip + '/updateAddress', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

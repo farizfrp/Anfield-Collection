@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Alert, FlatList, Text, View, Image, ScrollView, TextInput, Button, TouchableOpacity, TouchableHighlight, SectionList, ActivityIndicator, StatusBar } from 'react-native';
 import { Actions, onEnter } from 'react-native-router-flux';
 import InputSpinner from 'react-native-input-spinner';
-
+import { Icon } from 'react-native-elements'
 async function aaa() {
   console.log("aaa")
 }
@@ -85,7 +85,7 @@ export default class CartPageTest extends Component {
   async pullCart(id) {
 
 
-    let x = await fetch('http://' + ip + ':3001/pullCart', {
+    let x = await fetch(ip + '/pullCart', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -105,7 +105,7 @@ export default class CartPageTest extends Component {
     const userid = global.userid
     console.log(1);
 
-    let x = await fetch('http://' + ip + ':3001/getCarts', {
+    let x = await fetch(ip + '/getCarts', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -211,7 +211,7 @@ export default class CartPageTest extends Component {
   async pushCart() {
     
     cart = { id: this.props.item.id, quantity: this.state.quantity };
-    let x = await fetch('http://' + ip + ':3001/addCart', {
+    let x = await fetch(ip + '/addCart', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -230,7 +230,7 @@ export default class CartPageTest extends Component {
   async getMerchantName(id) {
     var result = null;
     
-    let x = await fetch('http://' + ip + ':3001/getMerchantName', {
+    let x = await fetch(ip + '/getMerchantName', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -300,20 +300,23 @@ export default class CartPageTest extends Component {
 
               </View><View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 10 }}>
                   <Image style={{ marginHorizontal: 20, width: 50, height: 50 }} source={{ uri: item.imageURL[0] }} />
-                  <Text style={{ fontSize: 14, fontWeight: "bold", marginLeft: -95 }}>{item.name}
-                  </Text>
+                  <View style={{  flex: 1,flexDirection: "column"}} >
+                    <Text style={{ fontSize: 14, fontWeight: "bold" }}>{item.name}</Text>
+                  <Text >Stock {item.quantityproduct} </Text>
+                <Text >Rp.{(item.price * Number(item.quantity)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
+                </View>
 
 
-                  <TouchableOpacity onPress={() => this.promptPull(item.id)}>
-                    <Image style={{ width: 30, height: 50, marginTop: -30, marginLeft: 65 }} source={require('../CartPage/delete.png')}
-
-                    ></Image>
-                  </TouchableOpacity>
+                  <Icon
+  raised
+  name='trash'
+  type='font-awesome'
+  color='#f50'
+  onPress={() => this.promptPull(item.id)} />
 
 
                 </View>
-                <Text style={{ marginLeft: 120, marginTop: -30, color: "Grey", paddingVertical: 5 }}>Stock {item.quantityproduct} </Text>
-                <Text style={{ marginLeft: 120, marginTop: -1, color: "red" }}>Rp.{(item.price * Number(item.quantity)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
+                
                 <InputSpinner
                   max={item.quantityproduct}
                   min={1}

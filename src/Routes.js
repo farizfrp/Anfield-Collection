@@ -138,7 +138,7 @@ export default class Routes extends Component {
 		 
 		   			<Scene key="AdminMenuPage" component={AdminMenuPage} title="AdminMenuPage" />
 				  <Scene key="Login" component={Login} title="Login" />
-				  <Scene key="MerchantOrderListPage" component={MerchantOrderListPage} title="MerchantOrderListPage" />
+				  <Scene key="MerchantOrderListPage" component={MerchantOrderListPage} title="MerchantOrderListPage" hideNavBar={false}/>
 			      <Scene key="signup" component={Signup} title="Register" />
 				  <Scene key="MainPage" component={MainPage} title="MainPage" />
 				  <Scene key="loginSuccess" component={loginSuccess} title="loginSuccess"/>
@@ -150,14 +150,14 @@ export default class Routes extends Component {
 				  <Scene key="ForgotPasswordPage" component={ForgotPasswordPage} title="ForgotPasswordPage"/>
 				  <Scene key="SearchPage" component={SearchPage} title="SearchPage"  />
 				  <Scene key="OrderPage" component={OrderPage} title="OrderPage"  />
-				  <Scene key="OrderListPage" component={OrderListPage} title="OrderListPage"  />
+				  <Scene key="OrderListPage" component={OrderListPage} title="OrderListPage"  hideNavBar={false}/>
 				  <Scene key="OrderDetailPage" component={OrderDetailPage} title="OrderDetailPage"  />
 				  <Scene key="CartPageTest" component={CartPageTest} title="CartPageTest"    />
-				  <Scene key="ListProduct" component={ListProduct} title="ListProduct"    />
-				  <Scene key="filterPricePage" component={filterPricePage} title="filterPricePage"   />
+				  <Scene key="ListProduct" component={ListProduct} title="ListProduct"    hideNavBar={false}/>
+				  <Scene key="filterPricePage" component={filterPricePage} title="filterPricePage"   hideNavBar={false}/>
 				  <Scene key="PDFpage" component={PDFpage} title="PDFpage"    />
-				  <Scene key="SellReportPage" component={SellReportPage} title="SellReportPage"   />
-				  <Scene key="ReportDatePage" component={ReportDatePage} title="ReportDatePage"    />
+				  <Scene key="SellReportPage" component={SellReportPage} title="SellReportPage"   hideNavBar={false}/>
+				  <Scene key="ReportDatePage" component={ReportDatePage} title="ReportDatePage"    hideNavBar={false}/>
 				  <Scene key="ReportOrderDetails" component={ReportOrderDetails} title="ReportOrderDetails"    />
 				  <Scene key="AddProductCategory" component={AddProductCategory} title="AddProductCategory"     />
 				  <Scene key="CategoryManagementPage" component={CategoryManagementPage} title="CategoryManagementPage"   />
@@ -166,12 +166,12 @@ export default class Routes extends Component {
 				  <Scene key="EditAddressPage" component={EditAddressPage} title="EditAddressPage"   />
 				  <Scene key="ProductImageManagement" component={ProductImageManagement} title="ProductImageManagement"  />
 				  <Scene key="EditProductPage" component={EditProductPage} title="EditProductPage"  />
-				  <Scene key="MerchantProductsPage" component={MerchantProductsPage} title="MerchantProductsPage"   />
+				  <Scene key="MerchantProductsPage" component={MerchantProductsPage} title="MerchantProductsPage"   hideNavBar={false}/>
 				  <Scene key="ProfilePage" component={ProfilePage} title="ProfilePage"  />
 				  <Scene key="EditProfilePage" component={EditProfilePage} title="EditProfilePage"   />
-				  <Scene key="AdminProductListPage" component={AdminProductListPage} title="AdminProductListPage"   />
-				  <Scene key="ProfileListPage" component={ProfileListPage} title="ProfileListPage"   />
-				  <Scene key="AdminSellReportPage" component={AdminSellReportPage} title="AdminSellReportPage"   />
+				  <Scene key="AdminProductListPage" component={AdminProductListPage} title="AdminProductListPage"   hideNavBar={false}/>
+				  <Scene key="ProfileListPage" component={ProfileListPage} title="ProfileListPage"   hideNavBar={false}/>
+				  <Scene key="AdminSellReportPage" component={AdminSellReportPage} title="AdminSellReportPage"   hideNavBar={false}/>
 				  <Scene key="MainMenuPage" component={MainMenuPage} title="MainMenuPage"   /> 
 				  <Scene key="AccountMenuPage" component={AccountMenuPage} title="AccountMenuPage"   /> 
 			    </Stack>

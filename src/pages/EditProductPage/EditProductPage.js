@@ -121,7 +121,7 @@ async groupBahan(categories){
 
        
             //   ip = '192.168.1.7';
-             await fetch('http://' + ip + ':3001/getCategories', {
+             await fetch(ip + '/getCategories', {
                method: 'GET',
                headers: {
                  'Accept': 'application/json',
@@ -285,7 +285,7 @@ var onSuccess;
         data.imageURL=this.images;
         
        // ip='192.168.1.7';
-    await fetch('http://' + ip + ':3001/updateProduct', {
+    await fetch(ip + '/updateProduct', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -377,13 +377,13 @@ var onSuccess;
                     <View style={{ marginLeft:8,marginVertical:10}}>
                         <Text>Berat</Text>
                         <TextInput keyboardType='numeric' placeholder="50 Gram" style={ styles.TextInputStyles}
-                        defaultValue={this.product.shipping_details.weight} onChangeText={(berat) => data.shipping_details.weight=Number(berat)} />
+                        defaultValue={this.product.shipping_details.weight.toString()} onChangeText={(berat) => data.shipping_details.weight=Number(berat)} />
                     </View>
                     
                     <View style={{ marginLeft:8,marginVertical:10}}>
                         <Text>Harga</Text>
                         <TextInput keyboardType='numeric' placeholder="Rp.150.000,00" style={ styles.TextInputStyles} 
-                       defaultValue={this.product.price}  onChangeText={(harga) => data.price=Number(harga)}/>
+                       defaultValue={this.product.price.toString()}  onChangeText={(harga) => data.price=Number(harga)}/>
                     </View>
 
                     <View style={{ marginLeft:8,marginVertical:10}}>

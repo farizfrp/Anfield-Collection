@@ -74,7 +74,7 @@ export default class MainPage extends Component {
         this.setState({ isLoading: false })
         
 
-        fetch('http://' + ip + ':3001/getProductList')
+        fetch(ip + '/getProductList')
             .then((response) => response.json())
             .then((responseJson) => {
              

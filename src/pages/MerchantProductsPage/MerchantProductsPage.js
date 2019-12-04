@@ -33,7 +33,7 @@ PRODUCT=[];
         console.log('getProductCat');
         
      //   ip = '192.168.1.7';
-        let x = await fetch('http://' + ip + ':3001/getProductListMerchant', {
+        let x = await fetch(ip + '/getProductListMerchant', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -61,7 +61,7 @@ PRODUCT=[];
         
         this.setState({products})
    
-         let x = await fetch('http://' + ip + ':3001/pullProduct', {
+         let x = await fetch(ip + '/pullProduct', {
            method: 'POST',
            headers: {
              'Accept': 'application/json',

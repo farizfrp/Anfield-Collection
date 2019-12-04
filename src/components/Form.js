@@ -34,7 +34,7 @@ export default class Logo extends Component {
       var user = { auth: { id: result.user.uid,
                             role:'user',
                             shipping:[] } }
-      fetch('http://' + ip + ':3001/getProfile', {
+      fetch(ip + '/getProfile', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

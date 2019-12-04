@@ -39,7 +39,7 @@ return false;
         console.log('filterPrice');
        
      //   ip = '192.168.1.7';
-        let x = await fetch('http://' + ip + ':3001/filterPrice', {
+        let x = await fetch(ip + '/filterPrice', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

@@ -195,7 +195,7 @@ return;
       
         //   console.log(this.props.data);
         //   ip = '192.168.1.7';
-        let x = await fetch('http://' + ip + ':3001/getAddress', {
+        let x = await fetch(ip + '/getAddress', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -231,7 +231,7 @@ index++;
 
 }
         //ip='192.168.1.7';
-         let x = await fetch('http://' + ip + ':3001/addOrder', {
+         let x = await fetch(ip + '/addOrder', {
              method: 'POST',
              headers: {
                 'Accept': 'application/json',

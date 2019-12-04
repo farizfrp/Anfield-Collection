@@ -14,12 +14,7 @@ import { Actions } from 'react-native-router-flux';
 
 console.disableYellowBox= true;
 
-ip='11.11.11.254';
-
-
-
-
-
+ip='https://anfieldcollection.kbscertification.co.id';
 
 export default class App extends Component {
 
@@ -37,7 +32,7 @@ async setAuth(){
   
   global.userid = result.auth.id;
   global.username= result.auth.username;
-  global.cartChanged = false;
+  global.cartChanged = true;
 
 }
 async componentDidMount(){

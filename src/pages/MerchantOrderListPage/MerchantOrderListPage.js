@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Image, ScrollView, TextInput, Button, TouchableOpacity, FlatList, ActivityIndicator, StatusBar, picker } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import DateTimePicker from "react-native-modal-datetime-picker";
+import {Icon} from 'native-base';
 //import { auth } from 'firebase-admin';
 
 
@@ -90,7 +91,7 @@ export default class MerchantOrderListPage extends Component {
     this.setState({ isLoading: true });
   
     //   ip = '192.168.1.7';
-    let x = await fetch('http://' + ip + ':3001/getMerchantOrders', {
+    let x = await fetch(ip + '/getMerchantOrders', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -163,16 +164,17 @@ data={this.orders}
 numColumns={1}
 renderItem={({item}) => (   
   <View><TouchableOpacity onPress={() =>
-   Actions.ReportOrderDetails({ paymentStatus:item.payment.transaction_status,shipping:item.products[0].shipping,customer:item.username,
-   date:item.created_on,invoice:item.invoice,total:'9999',products:item.products[0].data,
-   id:item.id,userid:item.userid,username:item.username
+   Actions.ReportOrderDetails({ payment:item.payment,paymentStatus:item.payment.transaction_status,shipping:item.products[0].shipping,customer:item.username,
+   date:item.created_on,invoice:item.invoice,total:item.products[0].total,products:item.products[0].data,merchantname:item.products[0].merchantname,
+   id:item.id,userid:item.userid,username:item.username,status:this.getStatus(item.payment.transaction_status,item.products[0].shipping.status)
     })} >
   <View style={{ marginTop: 10, marginHorizontal: 10, height: 30, backgroundColor: "#daffc2", borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
       <Text style={{ textAlign: "center", marginTop: 5 }}>{this.getStatus(item.payment.transaction_status,item.products[0].shipping.status)}</Text>
   </View>
   <View style={{ marginHorizontal: 10, backgroundColor: "#f5f6f7", flexDirection: "row", justifyContent: "space-between", borderBottomWidth: 1, borderColor: "grey" }}>
       <Text style={{ fontWeight: "bold", fontSize: 12, marginHorizontal: 20, marginVertical: 5 }}>{item.id}</Text>
-      <Text style={{ color: "grey", fontSize: 11, marginHorizontal: 20, marginVertical: 5 }} >{item.created_on}</Text>
+      <Text style={{ color: "grey", fontSize: 11, marginHorizontal: 20, marginVertical: 5 }} >{
+      (new Date(item.created_on)).toLocaleDateString('id-ID',{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</Text>
 
   </View>
   <View style={{ borderBottomWidth: 1, borderColor: "grey", marginHorizontal: 10, borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>

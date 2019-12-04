@@ -35,7 +35,7 @@ index++;
 
        
     //   ip = '192.168.1.7';
-       let x = await fetch('http://' + ip + ':3001/getCategoriesType', {
+       let x = await fetch(ip + '/getCategoriesType', {
        method: 'POST',
        headers: {
          'Accept': 'application/json',
@@ -62,7 +62,7 @@ var categories = this.state.inputData.map(function (row) {
 
   return { name:row.text }
 })
-  let x = await fetch('http://' + ip + ':3001/updateCategories', {
+  let x = await fetch(ip + '/updateCategories', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

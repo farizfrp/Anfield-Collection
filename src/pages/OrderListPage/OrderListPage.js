@@ -28,7 +28,7 @@ export default class OrderListPage extends Component {
 
         console.log(1);
 
-        let x = await fetch('http://' + ip + ':3001/getOrderList', {
+        let x = await fetch(ip + '/getOrderList', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

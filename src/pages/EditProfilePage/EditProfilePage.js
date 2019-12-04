@@ -44,7 +44,7 @@ export default class EditProfilePage extends Component {
         console.log('getProductCat');
         
      //   ip = '192.168.1.7';
-        let x = await fetch('http://' + ip + ':3001/getProfile', {
+        let x = await fetch(ip + '/getProfile', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -91,7 +91,7 @@ async updateProfile(){
   
   var isStatusChanged=(this.status!=this.profile.status);
 
-    await fetch('http://' + ip + ':3001/updateProfile', {
+    await fetch(ip + '/updateProfile', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

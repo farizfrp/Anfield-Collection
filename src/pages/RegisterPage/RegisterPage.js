@@ -77,8 +77,8 @@ async createAccount(){
   var username;
   await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
   .then((result) => {
-      email=this.state.email
-      username=this.state.username
+      email=this.state.email;
+      username=this.state.username;
 id=result.user.uid;
 console.log("UIDUID = ",id)
       console.log(result);
@@ -99,21 +99,9 @@ console.log("UIDUID = ",id)
 }
 
     async onRegister(){
-
-        // firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-        // .then(function(result) {
-        //     console.log(result);
-        //     firebase.auth().currentUser.sendEmailVerification().then(function() {
-                
-        //         }, function(error) {
-        //         // An error happened.
-        //         });
-        // }).catch(function(error) {
-        // console.log(error);
-        // });
         this.account.imageURL='https://cnam.ca/wp-content/uploads/2018/06/default-profile.gif';
         this.account.shipping=[]
-        let x = await fetch('http://' + ip + ':3001/addAccount', {
+        let x = await fetch(ip + '/addAccount', {
           method: 'POST',
           headers: {
               'Accept': 'application/json',

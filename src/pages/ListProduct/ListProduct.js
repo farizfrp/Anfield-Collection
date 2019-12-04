@@ -24,7 +24,7 @@ export default class ListProduct extends Component {
 
        
      //   ip = '192.168.1.7';
-        let x = await fetch('http://' + ip + ':3001/getProductListMerchant', {
+        let x = await fetch(ip + '/getProductListMerchant', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

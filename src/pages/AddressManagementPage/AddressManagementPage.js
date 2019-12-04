@@ -58,7 +58,7 @@ export default class AddressManagementPage extends Component {
   async pullAddress(val) {
 
     var id= this.userid;
-    let x = await fetch('http://' + ip + ':3001/pullAddress', {
+    let x = await fetch(ip + '/pullAddress', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -79,7 +79,7 @@ export default class AddressManagementPage extends Component {
     console.log('getAddress');
     //   console.log(this.props.data);
     //   ip = '192.168.1.7';
-    let x = await fetch('http://' + ip + ':3001/getAddress', {
+    let x = await fetch(ip + '/getAddress', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -114,7 +114,7 @@ export default class AddressManagementPage extends Component {
   async pushCart() {
     console.log('pushcart');
     cart = { id: this.props.item.id, quantity: this.state.quantity };
-    let x = await fetch('http://' + ip + ':3001/addCart', {
+    let x = await fetch(ip + '/addCart', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
